@@ -1,0 +1,24 @@
+.indicator {
+  width: 10px;
+  height: 10px;
+  background-color: lightgrey;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.list-group-item {
+  cursor: pointer;
+  background-color: #fbfbfd;
+
+  &:hover{
+    background-color: #f3f3f7;    
+  }
+}
+
+.list-group-item.right .indicator {
+  background-color: #4BBF73;
+}
+
+.list-group-item.error .indicator {
+  background-color: #c9302c;
+}

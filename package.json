@@ -42,6 +42,7 @@
     "eslint-watch": "^7.0.0",
     "file-loader": "^6.0.0",
     "node-loader": "^1.0.1",
+    "node-sass": "^4.14.1",
     "postcss-loader": "^3.0.0",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",

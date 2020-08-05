@@ -1,0 +1,23 @@
+.page-item {
+  flex: auto;
+  text-align: center;
+  
+}
+
+.page-item .page-link {
+  background-color: #1a1a1a;
+  border-right: 2px solid rgb(211, 211, 211);
+  color: #fff;
+}
+
+.page-item.active .page-link {
+  background-color: #000;
+}
+
+.page-item:last-child .page-link {
+  border-right: none;
+}
+
+.page-item:hover .page-link{
+  z-index: auto;
+}
