@@ -54,9 +54,12 @@
   "dependencies": {
     "bootswatch": "^4.5.0",
     "copy-webpack-plugin": "^6.0.3",
+    "core-js": "^3.6.5",
     "html-webpack-plugin": "^4.3.0",
     "path": "^0.12.7",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "regenerator-runtime": "^0.13.7"
   }
 }

@@ -3,3 +3,4 @@ dist
 songbirdAPI
 *.log
 package-lock.json
+src/data
