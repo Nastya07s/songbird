@@ -6,15 +6,20 @@ import ItemAnswerList from '../ItemAnswerList/ItemAnswerList.jsx';
 export default class AnswerList extends Component {
 
   // state = {
-  //   currentBird: null,
+  //   rightBird: null,
+  // }
+
+  // componentDidMount = () => {
+  //   this.setState({rightBird: this.props.rightBird})
   // }
 
   render() {
-
+    
     console.log('this.props.birdsData: ', this.props.birdsData);
     const bodyList = this.props.birdsData.map((bird) => {
       // console.log('bird: ', bird);
-      return <ItemAnswerList key={bird.id} name={bird.name} showBird={() => this.props.showBird(bird)}/>
+      
+      return <ItemAnswerList key={bird.id} name={bird.name} rightBird={this.props.rightBird} showBird={() => this.props.showBird(bird)}/>
     })
     console.log('bodyList: ', bodyList);
     return (
@@ -31,5 +36,5 @@ export default class AnswerList extends Component {
 AnswerList.propTypes = {
   birdsData: PropTypes.array,
   showBird: PropTypes.func,
-  currentBird: PropTypes.object,
+  rightBird: PropTypes.object,
 };
