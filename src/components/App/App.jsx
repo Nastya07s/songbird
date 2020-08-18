@@ -76,7 +76,7 @@ export default class App extends Component {
           <AnswerList birdsData={birdsData[currentStage]} showBird={this.showBird} rightBird={this.state.rightBird}/>
           <Description bird={this.state.currentBird}/>
         </div>
-        <NextLevelButton />
+        <NextLevelButton isGuessed={this.state.isGuessed}/>
       </div>
     )
   }
