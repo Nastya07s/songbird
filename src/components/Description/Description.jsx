@@ -12,7 +12,7 @@ export default class Description extends Component {
 
   render() {
     if (!this.props.bird) return null;
-    const { image, name } = this.props.bird;
+    const { image, name, description } = this.props.bird;
     return (
       <div className="col-md-6">
         <div className="bird-desc card">
@@ -26,7 +26,7 @@ export default class Description extends Component {
             </div>
           </div>
           <div className="bird-desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta aliquam accusantium voluptatum eveniet iure odio quod! Libero delectus repudiandae molestias, consequatur voluptatum ducimus voluptates, temporibus excepturi laudantium commodi unde, beatae repellendus totam! Nostrum, suscipit voluptatem rerum mollitia neque corrupti sit, magnam pariatur a vel dolorem eaque obcaecati autem nulla fugit.
+            {description}
           </div>
         </div>
       </div>

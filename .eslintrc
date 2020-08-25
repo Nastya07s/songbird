@@ -32,5 +32,6 @@
     "react": {
       "version": "16.3"
     }
-  }
+  },
+  "prettier/prettier": ["error", { "singleQuote": true }]
 }

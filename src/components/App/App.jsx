@@ -1,18 +1,18 @@
-import "core-js/stable";
-import "regenerator-runtime/runtime";
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
-import Score from "../Score/Score.jsx";
-import QuestionBlock from "../QuestionBlock/QuestionBlock.jsx";
-import QuestionList from "../QuestionList/QuestionList.jsx";
-import AnswerList from "../AnswerList/AnswerList.jsx";
-import Description from "../Description/Description.jsx";
-import NextLevelButton from "../NextLevelButton/NextLevelButton.jsx";
+import Score from '../Score/Score.jsx';
+import QuestionBlock from '../QuestionBlock/QuestionBlock.jsx';
+import QuestionList from '../QuestionList/QuestionList.jsx';
+import AnswerList from '../AnswerList/AnswerList.jsx';
+import Description from '../Description/Description.jsx';
+import NextLevelButton from '../NextLevelButton/NextLevelButton.jsx';
 
-import getRandomInt from "./../../helpers/helpers";
+import getRandomInt from './../../helpers/helpers';
 
-import birdsData from "./../../data/data.js";
+import birdsData from './../../data/data.js';
 
 export default class App extends Component {
   state = {
@@ -46,20 +46,26 @@ export default class App extends Component {
     }
   };
 
-  showBird = (bird) => {
-    console.log("bird: ", bird);
-    console.log("this.bird.rightBird: ", this.state.rightBird);
+  showBird = (bird, isTouched) => {
+    console.log('isTouched: ', isTouched);
+    // console.log("bird: ", bird);
+    // console.log("this.bird.rightBird: ", this.state.rightBird);
     if (bird === this.state.rightBird)
       this.setState((state) => ({
         currentBird: bird,
         isGuessed: true,
         score: state.score + state.currentScore,
       }));
-    else
-      this.setState((state) => ({
+    else {
+      let currentScore = this.state.currentScore;
+      if (!isTouched) {
+        currentScore -= 1; 
+      }
+      this.setState(() => ({
         currentBird: bird,
-        currentScore: state.currentScore - 1,
+        currentScore,
       }));
+    }
     // console.log(this.state.currentBird);
     // return this.showBirdDesc.bind(this, bird);
   };
@@ -99,6 +105,7 @@ export default class App extends Component {
             birdsData={birdsData[currentStage]}
             showBird={this.showBird}
             rightBird={this.state.rightBird}
+            isGuessed={this.state.isGuessed}
           />
           <Description bird={this.state.currentBird} />
         </div>

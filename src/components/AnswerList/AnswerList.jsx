@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import ItemAnswerList from '../ItemAnswerList/ItemAnswerList.jsx';
 
 export default class AnswerList extends Component {
-
   // state = {
   //   rightBird: null,
   // }
@@ -14,22 +13,26 @@ export default class AnswerList extends Component {
   // }
 
   render() {
-    
-    console.log('this.props.birdsData: ', this.props.birdsData);
+    // console.log('this.props.birdsData: ', this.props.birdsData);
     const bodyList = this.props.birdsData.map((bird) => {
       // console.log('bird: ', bird);
-      
-      return <ItemAnswerList key={bird.id} name={bird.name} rightBird={this.props.rightBird} showBird={() => this.props.showBird(bird)}/>
-    })
-    console.log('bodyList: ', bodyList);
+      // console.log('this.props.showBird: ', this.props.showBird);
+      return (
+        <ItemAnswerList
+          key={bird.id}
+          name={bird.name}
+          isGuessed={this.props.isGuessed}
+          rightBird={this.props.rightBird}
+          showBird={(isTouched) => this.props.showBird(bird, isTouched)}
+        />
+      );
+    });
+    // console.log('bodyList: ', bodyList);
     return (
-      
       <div className="col-md-6">
-        <div className="item-list list-group">
-          {bodyList}
-        </div>
+        <div className="item-list list-group">{bodyList}</div>
       </div>
-    )
+    );
   }
 }
 
@@ -37,4 +40,5 @@ AnswerList.propTypes = {
   birdsData: PropTypes.array,
   showBird: PropTypes.func,
   rightBird: PropTypes.object,
+  isGuessed: PropTypes.bool,
 };
