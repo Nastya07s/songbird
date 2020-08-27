@@ -47,32 +47,22 @@ export default class App extends Component {
   };
 
   showBird = (bird, isTouched) => {
-    console.log('isTouched: ', isTouched);
-    // console.log("bird: ", bird);
-    // console.log("this.bird.rightBird: ", this.state.rightBird);
-    if (bird === this.state.rightBird)
-      this.setState((state) => ({
-        currentBird: bird,
-        isGuessed: true,
-        score: state.score + state.currentScore,
-      }));
-    else {
-      let currentScore = this.state.currentScore;
-      if (!isTouched) {
-        currentScore -= 1; 
+    const { score, currentScore, rightBird, isGuessed } = this.state;
+    const newState = { currentBird: bird };
+    if (!isGuessed) {
+      if (bird === rightBird) {
+        newState.isGuessed = true;
+        newState.score = score + currentScore;
+      } else {
+        let currentScoreNew = currentScore;
+        if (!isTouched) currentScoreNew -= 1;
+        
+        newState.currentScore = currentScoreNew;
       }
-      this.setState(() => ({
-        currentBird: bird,
-        currentScore,
-      }));
-    }
-    // console.log(this.state.currentBird);
-    // return this.showBirdDesc.bind(this, bird);
-  };
 
-  // showBirdDesc = (bird) => {
-  //   console.log('birdDesc', bird);
-  // }
+      this.setState({ ...newState });
+    }
+  };
 
   render() {
     const { birdsData, currentStage, loading } = this.state;
