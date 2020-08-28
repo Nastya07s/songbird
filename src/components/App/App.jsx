@@ -12,12 +12,12 @@ import NextLevelButton from '../NextLevelButton/NextLevelButton.jsx';
 
 import getRandomInt from './../../helpers/helpers';
 
-import birdsData from './../../data/data.js';
+import { birdsData, stageNames } from './../../data/data.js';
 
 export default class App extends Component {
   state = {
     birdsData: null,
-    currentStage: 1,
+    currentStage: 0,
     currentBird: null,
     rightBird: null,
     isGuessed: false,
@@ -27,7 +27,6 @@ export default class App extends Component {
   };
 
   componentDidMount = async () => {
-    // console.log('birdsData: ', birdsData);
     const rightBirdNumber = getRandomInt(5);
     const rightBird = birdsData[this.state.currentStage][rightBirdNumber];
     // console.log('rightBird: ', rightBird);
@@ -56,7 +55,7 @@ export default class App extends Component {
       } else {
         let currentScoreNew = currentScore;
         if (!isTouched) currentScoreNew -= 1;
-        
+
         newState.currentScore = currentScoreNew;
       }
 
@@ -66,8 +65,8 @@ export default class App extends Component {
 
   render() {
     const { birdsData, currentStage, loading } = this.state;
+    console.log('currentStage: ', currentStage);
     //
-
     if (loading) return null;
 
     return (
@@ -85,7 +84,7 @@ export default class App extends Component {
             </ul>
           </div>
         </nav>
-        <QuestionList />
+        <QuestionList stageNames={stageNames} currentStage={currentStage} />
         <QuestionBlock
           rightBird={this.state.rightBird}
           isGuessed={this.state.isGuessed}
