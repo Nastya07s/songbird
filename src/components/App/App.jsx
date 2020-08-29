@@ -59,8 +59,8 @@ export default class App extends Component {
         newState.currentScore = currentScoreNew;
       }
 
-      this.setState({ ...newState });
     }
+    this.setState({ ...newState });
   };
 
   render() {

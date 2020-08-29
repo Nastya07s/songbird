@@ -17,6 +17,12 @@
 
   &__info{
     margin-left: 45px;
-  
+    margin-right: 12px;
+  }
+
+  &__player{
+    height: 100px;
+    display: flex;
+    align-items: center;
   }
 }

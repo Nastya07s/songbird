@@ -1,0 +1,46 @@
+.rhap_container{
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+.rhap_main {
+  padding-left: 75px;
+  position: relative;
+}
+
+.rhap_main-controls {
+  position: absolute;
+  left: 0;
+}
+
+.rhap_additional-controls{
+  display: none;
+}
+//  - контейрер плеера
+// .rhap_horizontal-reverse - внутрення часть плеера
+
+// .rhap_progress-section - секция progress bar
+// .rhap_time - время
+// .rhap_current_time - текущее время
+// .rhap_total_time - длительность трека
+
+// .rhap_progress-container - контейнер прогресса
+// .rhap_progress-bar - линия прогресс бара
+// .rhap_progress-indicator - индикатор прогресс бара
+// .rhap_progress-filled - проигранный участок
+
+// .rhap_controls-section
+
+// .rhap_main-controls - блок кнопок проигрывания
+// .rhap_button-clear - делает кнопки с прозрачным бекграундом, назначает курсор
+// .rhap_main-controls-button - размеры кнопки проигрывания 
+// .rhap_play-pause-button - кнопка проигрывания
+
+// .rhap_volume-controls - блок громкости
+
+// .rhap_volume-container - контейнер элемента громкости
+// .rhap_button-clear
+// .rhap_volume-button - кнопка включающаявыключающая громкость
+// .rhap_volume-bar-area - контейрер прогресс бара
+// .rhap_volume-bar - прогресс бар уровня громкости
+// .rhap_volume-indicator - индикатор уровня громкости

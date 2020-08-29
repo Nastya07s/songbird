@@ -60,6 +60,7 @@
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-h5-audio-player": "^3.3.2",
     "regenerator-runtime": "^0.13.7"
   }
 }
