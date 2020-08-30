@@ -41,7 +41,7 @@ export default class App extends Component {
     if (prevState.currentStage !== this.state.currentStage) {
       const rightBirdNumber = getRandomInt(5);
       const rightBird = birdsData[this.state.currentStage][rightBirdNumber];
-      this.setState({ currentBird: null, rightBird });
+      this.setState({ currentBird: null, rightBird, isGuessed: false, currentScore: 5 });
     }
   };
 
@@ -62,6 +62,13 @@ export default class App extends Component {
     }
     this.setState({ ...newState });
   };
+
+  goToNextLevel = (isActive) => {
+    if (!isActive) return null;
+    this.setState((state) => {
+      return {currentStage: state.currentStage + 1}
+    })
+  }
 
   render() {
     const { birdsData, currentStage, loading } = this.state;
@@ -98,7 +105,7 @@ export default class App extends Component {
           />
           <Description bird={this.state.currentBird} />
         </div>
-        <NextLevelButton isGuessed={this.state.isGuessed} />
+        <NextLevelButton isGuessed={this.state.isGuessed} goToNextLevel={this.goToNextLevel}/>
       </div>
     );
   }

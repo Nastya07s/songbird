@@ -8,6 +8,12 @@ export default class ItemAnswerList extends Component {
     status: '',
   };
 
+  componentDidUpdate = (prevProps) => {
+    if (this.props.rightBird !== prevProps.rightBird) {
+      this.setState({ status: '' })
+    }
+  }
+
   handleClick = () => {
     console.log('this.props.isGuessed: ', this.props.isGuessed);
     if (!this.props.isGuessed)

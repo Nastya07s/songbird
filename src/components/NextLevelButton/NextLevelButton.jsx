@@ -8,7 +8,7 @@ export default class NextLevelButton extends Component {
   render() {
     const isActive = this.props.isGuessed ? 'btn-warning' : '';
     return (
-      <button type="button" className={`btn ${isActive} next-level`}>Next Level</button>
+      <button type="button" className={`btn ${isActive} next-level`} onClick={() => this.props.goToNextLevel(isActive)}>Next Level</button>
     )
   }
 }
@@ -16,4 +16,5 @@ export default class NextLevelButton extends Component {
 
 NextLevelButton.propTypes = {
   isGuessed: PropTypes.bool,
+  goToNextLevel: PropTypes.func,
 }
