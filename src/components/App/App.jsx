@@ -1,7 +1,7 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 import Score from '../Score/Score.jsx';
 import QuestionBlock from '../QuestionBlock/QuestionBlock.jsx';
@@ -9,10 +9,16 @@ import QuestionList from '../QuestionList/QuestionList.jsx';
 import AnswerList from '../AnswerList/AnswerList.jsx';
 import Description from '../Description/Description.jsx';
 import NextLevelButton from '../NextLevelButton/NextLevelButton.jsx';
+import GameOver from '../GameOver/GameOver.jsx';
+
+
+import { birdsData, stageNames } from './../../data/data.js';
 
 import getRandomInt from './../../helpers/helpers';
 
-import { birdsData, stageNames } from './../../data/data.js';
+import achive from '../../img/achive.png';
+
+import './App.scss';
 
 export default class App extends Component {
   state = {
@@ -22,7 +28,8 @@ export default class App extends Component {
     rightBird: null,
     isGuessed: false,
     loading: true,
-    score: 0,
+    isFinish: true,
+    score: 30,
     currentScore: 5,
   };
 
@@ -38,10 +45,18 @@ export default class App extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if (prevState.currentStage !== this.state.currentStage) {
+    if (
+      prevState.currentStage !== this.state.currentStage &&
+      !this.state.isFinish
+    ) {
       const rightBirdNumber = getRandomInt(5);
       const rightBird = birdsData[this.state.currentStage][rightBirdNumber];
-      this.setState({ currentBird: null, rightBird, isGuessed: false, currentScore: 5 });
+      this.setState({
+        currentBird: null,
+        rightBird,
+        isGuessed: false,
+        currentScore: 5,
+      });
     }
   };
 
@@ -58,20 +73,21 @@ export default class App extends Component {
 
         newState.currentScore = currentScoreNew;
       }
-
     }
     this.setState({ ...newState });
   };
 
   goToNextLevel = (isActive) => {
     if (!isActive) return null;
-    this.setState((state) => {
-      return {currentStage: state.currentStage + 1}
-    })
-  }
+
+    const newState = { currentStage: this.state.currentStage + 1 };
+    if (newState.currentStage > 5) newState.isFinish = true;
+
+    this.setState({ ...newState });
+  };
 
   render() {
-    const { birdsData, currentStage, loading } = this.state;
+    const { birdsData, currentStage, loading, isFinish, score } = this.state;
     console.log('currentStage: ', currentStage);
     //
     if (loading) return null;
@@ -81,6 +97,7 @@ export default class App extends Component {
         <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
           <div className="navbar-brand">
             SONG<span className="bird-span">BIRD</span>
+            {score === 30 ? <img src={achive} height={40}/>: null}
           </div>
 
           <div className="" id="navbarColor03">
@@ -92,20 +109,29 @@ export default class App extends Component {
           </div>
         </nav>
         <QuestionList stageNames={stageNames} currentStage={currentStage} />
-        <QuestionBlock
-          rightBird={this.state.rightBird}
-          isGuessed={this.state.isGuessed}
-        />
-        <div className="row mb2">
-          <AnswerList
-            birdsData={birdsData[currentStage]}
-            showBird={this.showBird}
-            rightBird={this.state.rightBird}
-            isGuessed={this.state.isGuessed}
-          />
-          <Description bird={this.state.currentBird} />
-        </div>
-        <NextLevelButton isGuessed={this.state.isGuessed} goToNextLevel={this.goToNextLevel}/>
+        {isFinish ? (
+          <GameOver score={score} />
+        ) : (
+          <Fragment>
+            <QuestionBlock
+              rightBird={this.state.rightBird}
+              isGuessed={this.state.isGuessed}
+            />
+            <div className="row mb2">
+              <AnswerList
+                birdsData={birdsData[currentStage]}
+                showBird={this.showBird}
+                rightBird={this.state.rightBird}
+                isGuessed={this.state.isGuessed}
+              />
+              <Description bird={this.state.currentBird} />
+            </div>
+            <NextLevelButton
+              isGuessed={this.state.isGuessed}
+              goToNextLevel={this.goToNextLevel}
+            />
+          </Fragment>
+        )}
       </div>
     );
   }
