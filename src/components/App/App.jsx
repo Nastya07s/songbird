@@ -23,13 +23,13 @@ import './App.scss';
 export default class App extends Component {
   state = {
     birdsData: null,
-    currentStage: 0,
+    currentStage: 5,
     currentBird: null,
     rightBird: null,
     isGuessed: false,
     loading: true,
-    isFinish: true,
-    score: 30,
+    isFinish: false,
+    score: 25,
     currentScore: 5,
   };
 
@@ -44,13 +44,15 @@ export default class App extends Component {
     });
   };
 
-  componentDidUpdate = (prevProps, prevState) => {
+  componentWillUpdate = (nextProps, nextState) => {
     if (
-      prevState.currentStage !== this.state.currentStage &&
-      !this.state.isFinish
+      nextState.currentStage !== this.state.currentStage &&
+      !nextState.isFinish
     ) {
       const rightBirdNumber = getRandomInt(5);
-      const rightBird = birdsData[this.state.currentStage][rightBirdNumber];
+      const rightBird = birdsData[nextState.currentStage][rightBirdNumber];
+      console.log('birdsData[nextState.currentStage]: ', birdsData[nextState.currentStage]);
+      console.log('rightBird: ', rightBird);
       this.setState({
         currentBird: null,
         rightBird,
@@ -86,9 +88,23 @@ export default class App extends Component {
     this.setState({ ...newState });
   };
 
+  startGame = () => {
+    console.log(1);
+    this.setState({ 
+      currentStage: 0,
+      currentBird: null,
+      rightBird: null,
+      loading: false,
+      isFinish: false,
+      isGuessed: false,
+      score: 0,
+    })
+  }
+
   render() {
-    const { birdsData, currentStage, loading, isFinish, score } = this.state;
-    console.log('currentStage: ', currentStage);
+    const { birdsData, rightBird, currentStage, currentBird, loading, isFinish, isGuessed, score } = this.state;
+    console.log('RENDER rightBird: ', rightBird);
+    // console.log('currentStage: ', currentStage);
     //
     if (loading) return null;
 
@@ -103,31 +119,31 @@ export default class App extends Component {
           <div className="" id="navbarColor03">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
-                <Score score={this.state.score} />
+                <Score score={score} />
               </li>
             </ul>
           </div>
         </nav>
         <QuestionList stageNames={stageNames} currentStage={currentStage} />
         {isFinish ? (
-          <GameOver score={score} />
+          <GameOver score={score} startGame={this.startGame}/>
         ) : (
           <Fragment>
             <QuestionBlock
-              rightBird={this.state.rightBird}
-              isGuessed={this.state.isGuessed}
+              rightBird={rightBird}
+              isGuessed={isGuessed}
             />
             <div className="row mb2">
               <AnswerList
                 birdsData={birdsData[currentStage]}
                 showBird={this.showBird}
-                rightBird={this.state.rightBird}
-                isGuessed={this.state.isGuessed}
+                rightBird={rightBird}
+                isGuessed={isGuessed}
               />
-              <Description bird={this.state.currentBird} />
+              <Description bird={currentBird} />
             </div>
             <NextLevelButton
-              isGuessed={this.state.isGuessed}
+              isGuessed={isGuessed}
               goToNextLevel={this.goToNextLevel}
             />
           </Fragment>

@@ -13,6 +13,8 @@ export default class QuestionBlock extends Component {
     const { rightBird, isGuessed } = this.props;
     console.log('isGuessed: ', isGuessed);
     console.log('rightBird: ', rightBird);
+    
+    if (!rightBird) return null;
 
     const image = !isGuessed ? noneBird : rightBird.image;
     const name = !isGuessed ? '********' : rightBird.name;
