@@ -4,10 +4,8 @@ import PropTypes from 'prop-types';
 import Player from '../Player/Player.jsx';
 
 import './Description.scss';
-// import noneBird from './../../img/noneBird.jpg';
 
 export default class Description extends Component {
-
   createCard = () => {
     const { image, name, description, audio, species } = this.props.bird;
     return (
@@ -39,9 +37,7 @@ export default class Description extends Component {
     const content = isBirdSelected ? this.createCard() : defaultText;
     return (
       <div className="col-md-6">
-        <div className="bird-desc card">
-          {content}
-        </div>
+        <div className="bird-desc card">{content}</div>
       </div>
     );
   }

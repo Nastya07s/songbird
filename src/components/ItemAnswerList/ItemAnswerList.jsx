@@ -15,12 +15,12 @@ export default class ItemAnswerList extends Component {
   }
 
   handleClick = () => {
-    console.log('this.props.isGuessed: ', this.props.isGuessed);
     if (!this.props.isGuessed)
       this.setState({
         status:
           this.props.rightBird.name === this.props.name ? 'right' : 'error',
       });
+      
     const isTouched = this.state.status;
     this.props.showBird(isTouched)
   };
