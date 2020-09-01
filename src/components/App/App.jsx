@@ -16,9 +16,7 @@ import { birdsData, stageNames } from './../../data/data.js';
 
 import getRandomInt from './../../helpers/helpers';
 
-import achive from './../../img/achive.png';
-import correct from './../../data/audio/correct.mp3';
-import error from './../../data/audio/error.mp3';
+import achive from '../../img/achive.png';
 
 import './App.scss';
 
@@ -34,8 +32,6 @@ export default class App extends Component {
     score: 25,
     currentScore: 5,
   };
-
-  audio = new Audio();
 
   componentDidMount = async () => {
     const rightBirdNumber = getRandomInt(5);
@@ -73,17 +69,11 @@ export default class App extends Component {
       if (bird === rightBird) {
         newState.isGuessed = true;
         newState.score = score + currentScore;
-
-        this.audio.src = correct;
-        this.audio.play();
       } else {
         let currentScoreNew = currentScore;
         if (!isTouched) currentScoreNew -= 1;
 
         newState.currentScore = currentScoreNew;
-
-        this.audio.src = error;
-        this.audio.play();
       }
     }
     this.setState({ ...newState });
