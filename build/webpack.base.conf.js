@@ -39,7 +39,7 @@ module.exports = {
       use: ['babel-loader', 'eslint-loader'],
       exclude: '/node_modules/',
     }, {
-      test: /\.(png|jpg|gif|svg|webp)$/,
+      test: /\.(png|jpg|gif|svg|webp|mp3)$/,
       loader: 'file-loader',
       options: {
         name: '[name].[ext]',
