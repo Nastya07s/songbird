@@ -25,13 +25,13 @@ import './App.scss';
 export default class App extends Component {
   state = {
     birdsData: null,
-    currentStage: 5,
+    currentStage: 0,
     currentBird: null,
     rightBird: null,
     isGuessed: false,
     loading: true,
     isFinish: false,
-    score: 25,
+    score: 0,
     currentScore: 5,
   };
 
@@ -55,7 +55,7 @@ export default class App extends Component {
     ) {
       const rightBirdNumber = getRandomInt(5);
       const rightBird = birdsData[nextState.currentStage][rightBirdNumber];
-      
+
       this.setState({
         currentBird: null,
         rightBird,
