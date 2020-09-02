@@ -7,18 +7,15 @@ import 'react-h5-audio-player/src/styles.scss';
 import './Player.scss';
 
 const Player = (props) => {
-  console.log('props: ', props);
-
   return (
-  <AudioPlayer
-    showJumpControls={false}
-    src={props.audio}
-    layout='horizontal'
-    autoPlayAfterSrcChange={false}
-    // onPlay={(e) => console.log('onPlay', e)}
-    // other props here
-  />
-)};
+    <AudioPlayer
+      showJumpControls={false}
+      src={props.audio}
+      layout="horizontal"
+      autoPlayAfterSrcChange={false}
+    />
+  );
+};
 
 export default Player;
 

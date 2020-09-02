@@ -23,20 +23,20 @@ import './App.scss';
 export default class App extends Component {
   state = {
     birdsData: null,
-    currentStage: 5,
+    currentStage: 0,
     currentBird: null,
     rightBird: null,
     isGuessed: false,
     loading: true,
     isFinish: false,
-    score: 25,
+    score: 0,
     currentScore: 5,
   };
 
   componentDidMount = async () => {
     const rightBirdNumber = getRandomInt(5);
     const rightBird = birdsData[this.state.currentStage][rightBirdNumber];
-    // console.log('rightBird: ', rightBird);
+
     return this.setState({
       rightBird,
       birdsData,
@@ -51,8 +51,7 @@ export default class App extends Component {
     ) {
       const rightBirdNumber = getRandomInt(5);
       const rightBird = birdsData[nextState.currentStage][rightBirdNumber];
-      console.log('birdsData[nextState.currentStage]: ', birdsData[nextState.currentStage]);
-      console.log('rightBird: ', rightBird);
+
       this.setState({
         currentBird: null,
         rightBird,
@@ -89,7 +88,6 @@ export default class App extends Component {
   };
 
   startGame = () => {
-    console.log(1);
     this.setState({ 
       currentStage: 0,
       currentBird: null,
@@ -104,8 +102,7 @@ export default class App extends Component {
   render() {
     const { birdsData, rightBird, currentStage, currentBird, loading, isFinish, isGuessed, score } = this.state;
     console.log('RENDER rightBird: ', rightBird);
-    // console.log('currentStage: ', currentStage);
-    //
+
     if (loading) return null;
 
     return (
